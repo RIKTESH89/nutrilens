@@ -4,7 +4,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import Colors from '@/constants/Colors';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { FileText, Upload, ChevronRight, AlertCircle } from 'lucide-react-native';
+import { FileText, Upload, ChevronRight, CircleAlert as AlertCircle } from 'lucide-react-native';
 
 export default function ReportsScreen() {
   const colorScheme = useColorScheme() ?? 'light';
