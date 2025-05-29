@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, useColorScheme, TouchableOpacity } from 'react-native';
 import Colors from '@/constants/Colors';
 import MealCard from '@/components/MealCard';
 import HealthMetricCard from '@/components/HealthMetricCard';
+import AIInsightsCard from '@/components/AIInsightsCard';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { CirclePlus as PlusCircle, Utensils, TrendingUp } from 'lucide-react-native';
+import { analyzeMealAndHealth } from '@/utils/ai';
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme() ?? 'light';
   const colors = Colors[colorScheme];
   const [activeTab, setActiveTab] = useState('today');
+  const [aiInsights, setAiInsights] = useState([
+    {
+      type: 'observation',
+      content: 'Your protein intake has been consistently below target this week. Consider adding more lean protein sources to your meals.'
+    },
+    {
+      type: 'recommendation',
+      content: 'Based on your recent blood work, increasing iron-rich foods would be beneficial. Try incorporating more leafy greens and legumes.'
+    },
+    {
+      type: 'warning',
+      content: 'Your sodium intake has exceeded the recommended limit for 3 consecutive days. This may affect your blood pressure.'
+    }
+  ]);
 
   const todayMeals = [
     {
@@ -102,7 +118,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <ScrollView style={[styles.container, { backgroundColor: colors.background }]} contentContainerStyle={styles.contentContainer}>
       {/* Welcome Section */}
       <View style={styles.welcomeSection}>
         <Text style={[styles.welcomeText, { color: colors.text }]}>
@@ -112,6 +128,9 @@ export default function HomeScreen() {
           Wednesday, May 24
         </Text>
       </View>
+
+      {/* AI Insights Section */}
+      <AIInsightsCard insights={aiInsights} />
 
       {/* Health Overview Card */}
       <Card elevation={2} style={styles.overviewCard}>

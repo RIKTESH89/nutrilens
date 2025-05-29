@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, useColorScheme } from 'react-native';
 import Card from './ui/Card';
 import Colors from '@/constants/Colors';
-import { Brain, TrendingUp, AlertTriangle } from 'lucide-react-native';
+import { Brain, TrendingUp, TriangleAlert as AlertTriangle } from 'lucide-react-native';
 
 interface AIInsight {
   type: 'observation' | 'recommendation' | 'warning';
